@@ -20,28 +20,30 @@ In real quantitative asset management, 95%+ of AI-generated strategies fail out-
 
 ---
 
-## 2. Three Graduated Challenges for Your `Pi` Agent
+## 2. Three Levels: Start with Level 1, Then Pick Level 2 or Level 3
 
-This repository is structured into **three graduated levels** so your team can both learn the core falsification mechanics and push your agent on genuinely unsolved challenges:
+Each team builds **one agent** and picks **one project track** (you do **not** need to finish every folder). Start with Level 1 as a warm-up, then choose either Level 2 (audit & repair) or Level 3 (build your own strategy rule):
 
-### Level 1 — The 6 Guided Cases (`cases/case_01` … `cases/case_06`)
-- Six reference candidate packets (5 planted traps + 1 Clean Control) walked through during the Nov 10 kickoff lecture.
-- Use `python scripts/inspect_case.py --all` to see how deterministic verification functions catch each defect and confirm the clean control (`case_06_clean_sector_momentum`).
+### Level 1 — 6 Practice Cases (`cases/case_01` … `cases/case_06`)
+- Six guided examples with known answers (5 classic traps + 1 sound control) walked through during the Nov 10 kickoff lecture.
+- Use `python scripts/inspect_case.py --all` to see how each check catches a specific failure mode and confirms the sound control (`case_06_clean_sector_momentum`).
 
 ### Level 2 — 4 Unsolved Blind Challenges (`challenges/blind_01` … `challenges/blind_04`)
-- Four **unlabeled strategy packets** with **no spoilers in the folder names** and **no pre-written solver in `inspect_case.py`**:
+- Four **unlabeled strategy packets** with **no answer key in the repository** and **no pre-written solver in `inspect_case.py`**:
   - `challenges/blind_01_earnings_tone_drift/`
-  - `challenges/blind_02_sector_momentum_noisy/` *(Agent Repair Challenge: can your agent diagnose why the naive script loses money after costs and patch the signal smoothing/rebalance cadence to recover the underlying alpha?)*
+  - `challenges/blind_02_sector_momentum_noisy/`
   - `challenges/blind_03_factor_grid_winner/`
   - `challenges/blind_04_defensive_sector_shield/`
-- Task your `Pi` agent (via custom tools in `.pi/extensions/` or `scripts/`) to autonomously audit all 4 blind folders, repair `blind_02`, and record your findings in `submission/audit_verdicts.json`.
+- Not every packet is broken, and at least one flawed strategy can be repaired. Task your `Pi` agent (via custom tools in `.pi/extensions/` or `scripts/`) to inspect the evidence, repair what can be fixed, and record your `FUND` / `PILOT` / `PASS` verdicts in `submission/audit_verdicts.json`.
 
-### Level 3 — 130-Asset Custom Portfolio Sandbox (`data/market_sandbox/`)
+### Level 3 — Build Your Own Strategy Rule on 130 Assets (`data/market_sandbox/`)
+- **Ground Rule — A Strategy Rule, Not a Stock List**: Everyone already knows which stocks went up from 2018 to 2026. Asking an LLM to pick a fixed list of winners (`NVDA`, `LLY`, etc.) and replaying that static list from 2018 is **hindsight bias, not skill**.
+- A Level 3 entry must be a **repeatable rule** that decides what to hold on each date using **only data from before that date** (generating date-by-date weights evaluated via `python scripts/evaluate_custom_portfolio.py --weights-csv <your_weights.csv>`).
 - Inside `data/market_sandbox/`, you have daily returns (`2018-01-02` to `2026-06-30`, 2,134 trading days) across **130 Assets (`multi_asset_universe_130_returns_2018_2026.csv`)**:
   - **42 Liquid Multi-Asset & Thematic ETFs** (`liquid_etf_daily_returns_2018_2026.csv`: Broad US, 13 Sectors, 10 Industry/Thematic like `SMH`, `IGV`, `IBB`, `XBI`, `KRE`, `XOP`, `ITA`, `GDX`, `XHB`, `XRT`, 5 Factor ETFs `MTUM`, `QUAL`, `VLUE`, `USMV`, `SIZE`, 5 Treasury/Credit ETFs `SHY`, `IEF`, `TLT`, `LQD`, `HYG`, and 3 Commodity ETFs `GLD`, `SLV`, `DBC`).
   - **80 Active US Large-Cap Equities** (`us_equity_daily_returns_2018_2026.csv`: S&P 100 / Nasdaq-100 leaders across all 11 sectors) **+ 8 Delisted Historical Trap Stocks (`DELIST_01` … `DELIST_08`)** to test whether your agent's stock screen checks universe survivorship (`sandbox_universe_metadata.json`).
   - **Macro & Regime Indicators** (`macro_and_regime_signals_2018_2026.csv`).
-- Have your agent synthesize, repair, or ensemble a long-only portfolio (3 to 25 liquid ETFs and/or large-cap equities) and evaluate it with `python scripts/evaluate_custom_portfolio.py` (which logs every trial to `logs/sandbox_trial_ledger.jsonl` so your Deflated Sharpe Ratio is tracked honestly), then output your final weights in `submission/portfolio_submission.json`.
+- Evaluate your dynamic strategy rule (`--weights-csv`) against equal-weight and same-size random portfolios from the same 130 assets (every test run is logged to `logs/sandbox_trial_ledger.jsonl` so multiple testing is tracked), and export its final holdings snapshot to `submission/portfolio_submission.json`.
 
 ---
 
