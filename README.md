@@ -36,9 +36,7 @@ This repository is structured into **three graduated levels** so your team can b
   - `challenges/blind_04_defensive_sector_shield/`
 - Task your `Pi` agent (via custom tools in `.pi/extensions/` or `scripts/`) to autonomously audit all 4 blind folders, repair `blind_02`, and record your findings in `submission/audit_verdicts.json`.
 
-### Level 3 — The $1,000 Post-Cutoff Live Duel (`data/market_sandbox/` · Nov 18 – Dec 18, 2026)
-- Prof. Christian Grewell is funding the winning team's recommendation with **$1,000 in real cash** for one month starting **Wednesday, Nov 18, 2026**.
-- **Nov 18 – Dec 18, 2026 lies strictly after every frontier LLM's training cutoff**—making it a true test of out-of-sample generalization.
+### Level 3 — 130-Asset Custom Portfolio Sandbox (`data/market_sandbox/`)
 - Inside `data/market_sandbox/`, you have daily returns (`2018-01-02` to `2026-06-30`, 2,134 trading days) across **130 Assets (`multi_asset_universe_130_returns_2018_2026.csv`)**:
   - **42 Liquid Multi-Asset & Thematic ETFs** (`liquid_etf_daily_returns_2018_2026.csv`: Broad US, 13 Sectors, 10 Industry/Thematic like `SMH`, `IGV`, `IBB`, `XBI`, `KRE`, `XOP`, `ITA`, `GDX`, `XHB`, `XRT`, 5 Factor ETFs `MTUM`, `QUAL`, `VLUE`, `USMV`, `SIZE`, 5 Treasury/Credit ETFs `SHY`, `IEF`, `TLT`, `LQD`, `HYG`, and 3 Commodity ETFs `GLD`, `SLV`, `DBC`).
   - **80 Active US Large-Cap Equities** (`us_equity_daily_returns_2018_2026.csv`: S&P 100 / Nasdaq-100 leaders across all 11 sectors) **+ 8 Delisted Historical Trap Stocks (`DELIST_01` … `DELIST_08`)** to test whether your agent's stock screen checks universe survivorship (`sandbox_universe_metadata.json`).
@@ -65,7 +63,7 @@ pytest -q
 # 4. Run diagnostics on Guided Case 02 (The Cost Cliff)
 python scripts/inspect_case.py --case case_02_the_cost_cliff
 
-# 5. Evaluate a portfolio on the 20-ETF Market Sandbox (auto-logs trial N for DSR)
+# 5. Evaluate a portfolio on the 130-Asset Market Sandbox (auto-logs trial N for DSR)
 python scripts/evaluate_custom_portfolio.py --portfolio submission/portfolio_submission_template.json
 ```
 
@@ -78,7 +76,7 @@ python scripts/evaluate_custom_portfolio.py --portfolio submission/portfolio_sub
 | **Card A: Unstructured Signal Extraction** | `case_01_filing_lag_mirage` · `blind_01_earnings_tone_drift` | Compare LLM sentiment scores with company/year visible vs anonymized (`COMPANY_REDACTED`), and audit `fiscal_period_end` vs `sec_acceptance_timestamp_et` / lag alignment |
 | **Card B: Hypothesis & Backtest Critic** | `case_02_the_cost_cliff` · `case_03_twenty_tries` · `case_05_survivorship_trap` · `blind_02_sector_momentum_noisy` · `blind_03_factor_grid_winner` | `cost_sensitivity_curve()`, `expected_max_sharpe()`, `deflated_sharpe_ratio()`, `benjamini_hochberg()`, survivorship cohort comparison, agent code repair |
 | **Card C: Regime & Risk Monitor** | `case_04_regime_correlation_spike` · `case_06_clean_sector_momentum` · `blind_04_defensive_sector_shield` | `regime_correlation_audit()` (`CALM` vs `STRESS` pairwise correlation spike, tail skewness) & `matched_null_benchmark()` |
-| **Card D: Open Quantit Challenge** | All 6 Guided Cases + 4 Blind Challenges + `data/market_sandbox/` | Build an end-to-end Falsification & Portfolio Construction Agent that audits all packets and builds a winning `$1,000` live portfolio |
+| **Card D: Open Quantit Challenge** | All 6 Guided Cases + 4 Blind Challenges + `data/market_sandbox/` | Build an end-to-end Falsification & Portfolio Construction Agent that audits all packets and builds a custom multi-asset or equity portfolio |
 
 ---
 
@@ -93,7 +91,7 @@ quantit-nyu-hackathon-2026/
 ├── quantit_audit/                   # Deterministic verification & falsification library
 │   ├── backtest.py                  # Lagged backtester, cost curve, matched-null Monte Carlo, regime audit
 │   ├── statistics.py                # Deflated Sharpe Ratio (DSR), Expected Max Null SR, BH-FDR
-│   └── validator.py                 # Schema & risk-limit validator for audit verdicts and $1,000 live portfolio
+│   └── validator.py                 # Schema & risk-limit validator for audit verdicts and custom portfolio
 ├── cases/                           # Level 1: 6 Guided Candidate Packets (5 traps + 1 clean control)
 │   ├── case_01_filing_lag_mirage/
 │   ├── case_02_the_cost_cliff/
@@ -108,14 +106,14 @@ quantit-nyu-hackathon-2026/
 │   └── blind_04_defensive_sector_shield/
 ├── data/
 │   ├── public_benchmarks/           # Ken French Daily 12 Industries & Fama-French Factors (2018–2026)
-│   └── market_sandbox/              # Level 3: 20-ETF Daily Return & Macro/Regime Sandbox for $1,000 Live Duel
+│   └── market_sandbox/              # Level 3: 130-Asset Daily Return & Macro/Regime Sandbox (2018–2026)
 ├── scripts/
 │   ├── inspect_case.py              # CLI diagnostic runner for the 6 guided cases
 │   ├── evaluate_custom_portfolio.py # Sandbox evaluator with automatic trial-ledger DSR tracking
 │   └── validate_submission.py       # Pre-flight check for your final JSON deliverables
 ├── submission/
 │   ├── audit_verdicts_template.json         # Structured Fund / Pilot / Pass table across cases & blind challenges
-│   └── portfolio_submission_template.json   # Executable spec for the $1,000 Nov 18 – Dec 18 Live Duel
+│   └── portfolio_submission_template.json   # Custom portfolio weight & risk specification
 └── tests/
     └── test_audit_toolkit.py        # Unit tests verifying the math and case integrity
 ```
@@ -132,7 +130,7 @@ quantit-nyu-hackathon-2026/
    - 1 real mistake your AI agent made during development and how your guardrail caught/fixed it.
    - Validated `submission/audit_verdicts.json` and `submission/portfolio_submission.json` (check with `python scripts/validate_submission.py`).
 4. **90-Second Demo Video**: Submitted before class on Nov 17.
-5. **5-Minute Live Pitch**: Delivered live on Nov 17, closing with an evidence-backed **`FUND`**, **`PILOT`**, or **`PASS`** recommendation and your $1,000 live portfolio spec.
+5. **5-Minute Live Pitch**: Delivered live on Nov 17, closing with an evidence-backed **`FUND`**, **`PILOT`**, or **`PASS`** recommendation and your custom portfolio specification.
 
 ---
 
