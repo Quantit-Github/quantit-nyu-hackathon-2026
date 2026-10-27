@@ -12,5 +12,5 @@ Buying high-growth stocks immediately after a sharp 20-day drawdown delivers a *
 - `universe_constituents.json`: Metadata documenting how the 30-stock universe was selected.
 - `delisting_cohort_audit.csv` & `point_in_time_full_returns.csv`: Point-in-time archive including the 12 cohort companies that delisted during 2020–2025.
 
-## 3. Question for the Investment Committee
+## 3. Audit & Validation Question
 Why does buying deep dips look unbeatable on `survivor_panel_returns.csv`? Re-run the exact same deep-dip rule on `point_in_time_full_returns.csv` (which includes the 12 delisted names up to their delisting date), quantify the survivorship bias gap, and render your **FUND / PILOT / PASS** verdict.

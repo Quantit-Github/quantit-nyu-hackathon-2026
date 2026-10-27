@@ -19,13 +19,17 @@ from quantit_audit.statistics import (
 )
 from quantit_audit.validator import (
     ALLOWED_LIQUID_TICKERS,
-    validate_ic_verdicts,
+    BLIND_CHALLENGE_CASES,
+    REQUIRED_CASES,
+    validate_audit_verdicts,
     validate_portfolio_submission,
 )
 
 __all__ = [
     "ALLOWED_LIQUID_TICKERS",
+    "BLIND_CHALLENGE_CASES",
     "BacktestResult",
+    "REQUIRED_CASES",
     "benjamini_hochberg",
     "cost_sensitivity_curve",
     "deflated_sharpe_ratio",
@@ -35,6 +39,6 @@ __all__ = [
     "run_weights_backtest",
     "sharpe_pvalue",
     "signals_to_weights",
-    "validate_ic_verdicts",
+    "validate_audit_verdicts",
     "validate_portfolio_submission",
 ]

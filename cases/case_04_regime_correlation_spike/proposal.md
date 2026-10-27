@@ -11,5 +11,5 @@ We combine five distinct alternative risk-premia sleeves at equal weight (20% ea
 - `market_regime.csv`: Market benchmark return, 20-day rolling market drawdown, and `CALM` vs `STRESS` regime labels.
 - `target_weights.csv`: Proposed static 20% equal-weight allocation.
 
-## 3. Question for the Investment Committee
+## 3. Audit & Validation Question
 Does this 5-sleeve portfolio actually diversify risk when investors need it most? Compare the correlation matrix, portfolio volatility, skewness, and drawdown in `CALM` vs `STRESS` regimes, and evaluate whether the static allocation should be **FUNDED**, **PILOTED** (only with a specific regime guardrail), or **PASSED**.

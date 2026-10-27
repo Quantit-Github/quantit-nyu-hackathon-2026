@@ -1,4 +1,4 @@
-"""Validators for Investment Committee verdicts and the $1,000 Post-Cutoff Live Duel portfolio."""
+"""Validators for Strategy Audit verdicts and the $1,000 Post-Cutoff Live Duel portfolio."""
 
 from __future__ import annotations
 
@@ -12,6 +12,13 @@ REQUIRED_CASES = (
     "case_04_regime_correlation_spike",
     "case_05_survivorship_trap",
     "case_06_clean_sector_momentum",
+)
+
+BLIND_CHALLENGE_CASES = (
+    "blind_01_earnings_tone_drift",
+    "blind_02_sector_momentum_noisy",
+    "blind_03_factor_grid_winner",
+    "blind_04_defensive_sector_shield",
 )
 
 VALID_CALLS = ("FUND", "PILOT", "PASS")
@@ -32,8 +39,8 @@ ALLOWED_LIQUID_TICKERS = {
 }
 
 
-def validate_ic_verdicts(payload: dict | Path) -> list[str]:
-    """Validate `submission/ic_verdicts.json` structure and evidence fields.
+def validate_audit_verdicts(payload: dict | Path) -> list[str]:
+    """Validate `submission/audit_verdicts.json` structure and evidence fields.
 
     Returns a list of error strings (empty list == VALID).
     """
@@ -73,6 +80,17 @@ def validate_ic_verdicts(payload: dict | Path) -> list[str]:
         errors.append(
             f"All 6 cases were marked `{decisions[0]}` — remember the pack contains both planted traps AND at least one sound control."
         )
+
+    # Validate blind_challenge_verdicts if provided and populated
+    blind_verdicts = payload.get("blind_challenge_verdicts")
+    if isinstance(blind_verdicts, dict):
+        for bid, bentry in blind_verdicts.items():
+            if bid not in BLIND_CHALLENGE_CASES:
+                errors.append(f"Unknown blind challenge id `{bid}` (expected one of {BLIND_CHALLENGE_CASES}).")
+                continue
+            bcall = bentry.get("decision")
+            if bcall not in VALID_CALLS:
+                errors.append(f"`{bid}.decision` must be one of {VALID_CALLS}, got {bcall!r}.")
 
     return errors
 

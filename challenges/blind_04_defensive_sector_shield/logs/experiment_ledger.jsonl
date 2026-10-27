@@ -1,0 +1,2 @@
+{"trial_id": 1, "candidate_name": "defensive_shield_50pct_cash", "n_obs": 2114, "net_sharpe_10bps": 1.204, "annual_turnover": 20.03}
+{"trial_id": 2, "candidate_name": "defensive_shield_30pct_cash", "n_obs": 2114, "net_sharpe_10bps": 1.164, "annual_turnover": 18.02}

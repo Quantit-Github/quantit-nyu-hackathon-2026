@@ -1,30 +1,29 @@
-"""Unit and integration tests for the Quantit Audit Toolkit and the 6 Candidate Cases."""
+"""Unit and integration tests for the Quantit Audit Toolkit, Guided Cases, Blind Challenges, and Market Sandbox."""
 
 from __future__ import annotations
 
 import json
 from pathlib import Path
 
-import numpy as np
 import pandas as pd
 import pytest
 
 from quantit_audit import (
-    benjamini_hochberg,
+    BLIND_CHALLENGE_CASES,
+    REQUIRED_CASES,
     cost_sensitivity_curve,
     deflated_sharpe_ratio,
     expected_max_sharpe,
-    matched_null_benchmark,
-    regime_correlation_audit,
     run_weights_backtest,
-    sharpe_pvalue,
     signals_to_weights,
-    validate_ic_verdicts,
+    validate_audit_verdicts,
     validate_portfolio_submission,
 )
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 CASES_DIR = REPO_ROOT / "cases"
+CHALLENGES_DIR = REPO_ROOT / "challenges"
+SANDBOX_DIR = REPO_ROOT / "data" / "market_sandbox"
 
 
 def test_lag_guard_rejects_zero_lag():
@@ -36,7 +35,6 @@ def test_lag_guard_rejects_zero_lag():
 
 
 def test_multiple_testing_deflation_monotone():
-    # Higher trial count N must strictly increase expected max null Sharpe and lower DSR
     sr_obs = 1.60
     n_obs = 504
     e1 = expected_max_sharpe(1, n_obs)
@@ -50,20 +48,20 @@ def test_multiple_testing_deflation_monotone():
     assert dsr_80 < 0.50
 
 
-def test_all_six_cases_exist_and_load_cleanly():
-    expected = [
-        "case_01_filing_lag_mirage",
-        "case_02_the_cost_cliff",
-        "case_03_twenty_tries",
-        "case_04_regime_correlation_spike",
-        "case_05_survivorship_trap",
-        "case_06_clean_sector_momentum",
-    ]
-    for cid in expected:
+def test_all_guided_and_blind_cases_and_sandbox_exist():
+    for cid in REQUIRED_CASES:
         cdir = CASES_DIR / cid
-        assert cdir.is_dir(), f"Missing {cid}"
+        assert cdir.is_dir(), f"Missing guided case {cid}"
         assert (cdir / "proposal.md").is_file()
         assert (cdir / "metadata.json").is_file()
+
+    for bid in BLIND_CHALLENGE_CASES:
+        bdir = CHALLENGES_DIR / bid
+        assert bdir.is_dir(), f"Missing blind challenge {bid}"
+        assert (bdir / "proposal.md").is_file()
+
+    assert (SANDBOX_DIR / "liquid_etf_daily_returns_2018_2026.csv").is_file()
+    assert (SANDBOX_DIR / "macro_and_regime_signals_2018_2026.csv").is_file()
 
 
 def test_case_02_cost_cliff_flips_sign():
@@ -89,7 +87,11 @@ def test_case_06_clean_control_passes_gates():
     assert dsr > 0.95
 
 
-def test_portfolio_validator_catches_template_and_passes_valid():
+def test_validators_catch_templates_and_pass_valid():
+    v_tmpl = REPO_ROOT / "submission" / "audit_verdicts_template.json"
+    v_errs = validate_audit_verdicts(v_tmpl)
+    assert any("team_name" in e for e in v_errs)
+
     tmpl_path = REPO_ROOT / "submission" / "portfolio_submission_template.json"
     errs = validate_portfolio_submission(tmpl_path)
     assert any("team_name" in e for e in errs)

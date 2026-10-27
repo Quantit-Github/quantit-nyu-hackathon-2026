@@ -13,9 +13,9 @@ Rather than chasing a 2.5+ Sharpe mirage with daily flipping or 80 parameter swe
 - `logs/experiment_ledger.jsonl`: Complete pre-registered experiment log ($N = 3$ trials total).
 - `sector_etf_mapping.json`: Direct mapping from the 12 sectors to liquid US ETFs (`XLK`, `XLF`, `XLE`, `XLV`, `XLI`, `XLP`, `XLY`, `XLU`, `XLB`, `XLC`, `IYC`, `IYR`) for the $1,000 live execution duel.
 
-## 3. Question for the Investment Committee
+## 3. Audit & Validation Question
 Run your full falsification suite on Case 06:
 1. Verify lag alignment (`.shift(1)`), annualized turnover (`17.40x/yr`), and net Sharpe at 10 bps (`1.20`) and 15 bps (`1.16`).
 2. Compute the **Deflated Sharpe Ratio (DSR)** given $N = 3$ trials in `logs/experiment_ledger.jsonl`.
 3. Compare against a **Same-Count Random Basket Control** (1,000 Monte Carlo draws holding 4 random sectors rebalanced weekly).
-4. Should the IC **FUND**, **PILOT**, or **PASS** — and if funded for the $1,000 live duel, what kill-switch drawdown limit should govern the book?
+4. Should your validation gate **FUND**, **PILOT**, or **PASS** — and if funded for the $1,000 live duel, what kill-switch drawdown limit should govern the book?

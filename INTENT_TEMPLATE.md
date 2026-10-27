@@ -8,7 +8,7 @@
 - **Selected Starter Card**: (Card A: Unstructured Signal Extraction / Card B: Hypothesis & Backtest Critic / Card C: Regime & Risk Monitor / Card D: Open Quantit Challenge)
 
 ## 2. Target User & Decision Bottleneck
-- **Who is the user?** (e.g., Portfolio Manager, Quantitative Researcher, Investment Committee Risk Officer)
+- **Who is the user?** (e.g., Portfolio Manager, Quantitative Researcher, Risk & Validation Lead)
 - **What specific decision fails today when using naive AI agents?**
 - **Why does this matter before deploying real capital?**
 

@@ -15,7 +15,7 @@
       "decision": "PASS",
       "primary_finding": "TODO: State what happens when filing dates and entity anonymization are enforced.",
       "key_metric_evidence": {
-        "claimed_sharpe": 2.78,
+        "claimed_sharpe": 2.49,
         "audited_sharpe": 0.0
       }
     },
@@ -32,7 +32,7 @@
       "decision": "PASS",
       "primary_finding": "TODO: State the total trial count N in experiment_ledger.jsonl and the resulting DSR / FDR.",
       "key_metric_evidence": {
-        "claimed_sharpe": 1.33,
+        "claimed_sharpe": 2.04,
         "n_trials": 0,
         "deflated_sharpe_ratio": 0.0
       }
@@ -50,7 +50,7 @@
       "decision": "PASS",
       "primary_finding": "TODO: Quantify the performance gap when the 12 delisted cohort stocks are included point-in-time.",
       "key_metric_evidence": {
-        "survivor_only_sharpe": 1.56,
+        "survivor_only_sharpe": 1.12,
         "full_cohort_pit_sharpe": 0.0
       }
     },
@@ -58,10 +58,28 @@
       "decision": "FUND",
       "primary_finding": "TODO: Verify cost survival, DSR on N=3 pre-registered trials, and random-basket percentile.",
       "key_metric_evidence": {
-        "net_sharpe_10bps": 1.2,
+        "net_sharpe_10bps": 1.21,
         "deflated_sharpe_ratio": 0.0,
-        "null_p95_sharpe": 0.0
+        "null_p99_sharpe": 0.0
       }
+    }
+  },
+  "blind_challenge_verdicts": {
+    "blind_01_earnings_tone_drift": {
+      "decision": "PASS",
+      "primary_finding": "TODO: Have your agent audit challenges/blind_01_earnings_tone_drift and report the hidden defect."
+    },
+    "blind_02_sector_momentum_noisy": {
+      "decision": "PILOT",
+      "primary_finding": "TODO: Have your agent diagnose and repair challenges/blind_02_sector_momentum_noisy."
+    },
+    "blind_03_factor_grid_winner": {
+      "decision": "PASS",
+      "primary_finding": "TODO: Have your agent audit challenges/blind_03_factor_grid_winner."
+    },
+    "blind_04_defensive_sector_shield": {
+      "decision": "FUND",
+      "primary_finding": "TODO: Have your agent audit challenges/blind_04_defensive_sector_shield."
     }
   },
   "one_ai_mistake_caught_during_build": {

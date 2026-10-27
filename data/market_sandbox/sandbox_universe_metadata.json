@@ -1,0 +1,29 @@
+{
+  "description": "Self-contained daily return and macro regime sandbox (2018-01-02 to 2026-06-30) for building and stress-testing custom agent strategies for the $1,000 live run.",
+  "tickers": [
+    "SPY",
+    "QQQ",
+    "IWM",
+    "XLK",
+    "XLF",
+    "XLE",
+    "XLV",
+    "XLI",
+    "XLP",
+    "XLY",
+    "XLU",
+    "XLB",
+    "XLC",
+    "IYC",
+    "IYR",
+    "SHY",
+    "IEF",
+    "TLT",
+    "GLD",
+    "LQD"
+  ],
+  "walk_forward_split_recommendation": {
+    "discovery_train_period": "2018-01-02 to 2023-12-29",
+    "out_of_sample_validation_period": "2024-01-02 to 2026-06-30"
+  }
+}

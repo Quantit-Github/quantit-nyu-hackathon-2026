@@ -11,5 +11,5 @@ Our autonomous research agent discovered `alpha_cand_070`, a low-turnover cross-
 - `returns_panel.csv`: Daily industry returns (`2021-01-04` to `2024-12-31`).
 - `logs/experiment_ledger.jsonl`: The autonomous agent's run log from the discovery session.
 
-## 3. Question for the Investment Committee
+## 3. Audit & Validation Question
 An agent that only checks `winning_signal.csv` against `returns_panel.csv` will confirm a Net Sharpe of **2.03** and a naive two-sided $p$-value of **0.0041**. Audit the full discovery process (including `logs/experiment_ledger.jsonl`), compute the **Expected Maximum Sharpe under the null** and the **Deflated Sharpe Ratio (DSR)** / **Benjamini-Hochberg FDR**, and render your **FUND / PILOT / PASS** verdict.

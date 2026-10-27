@@ -9,8 +9,8 @@ We built an LLM extraction pipeline that reads quarterly SEC Form 10-Q/8-K text 
 ## 2. Supplied Artifacts
 - `filings_and_quotes.json`: 60 representative filing excerpts showing the exact timestamps, raw text passed to the LLM, anonymized text (with entity/year redacted), and resulting LLM sentiment scores.
 - `proposer_signal_panel.csv`: The daily signal panel produced by our pipeline (`dates x tickers`).
-- `pit_aligned_signal_panel.csv`: Control panel re-indexed by the compliance team to `sec_acceptance_timestamp_et` using entity-masked prompts.
+- `pit_aligned_signal_panel.csv`: Control panel re-indexed to `sec_acceptance_timestamp_et` using entity-masked prompts.
 - `returns_panel.csv`: Daily stock returns (`dates x tickers`).
 
-## 3. Question for the Investment Committee
-Should the committee **FUND**, **PILOT**, or **PASS** on this unstructured filing-sentiment agent? Back up your call with concrete diagnostics on timestamp alignment (`fiscal_period_end` vs `sec_acceptance_timestamp_et`) and LLM entity-recall leakage.
+## 3. Audit & Validation Question
+Should your validation agent **FUND**, **PILOT**, or **PASS** on this unstructured filing-sentiment strategy? Back up your call with concrete diagnostics on timestamp alignment (`fiscal_period_end` vs `sec_acceptance_timestamp_et`) and LLM entity-recall leakage.

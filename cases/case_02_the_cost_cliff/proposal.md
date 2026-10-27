@@ -11,5 +11,5 @@ Our agent discovered a fast daily cross-sectional rotation signal across the 12 
 - `returns_panel.csv`: Real daily returns of the 12 Ken French US Industry Portfolios (`2019-01-02` to `2026-06-30`).
 - `proposer_backtest.py`: The exact Python script used by the proposing agent to compute its "net-of-cost" Sharpe ratio.
 
-## 3. Question for the Investment Committee
-Inspect `proposer_backtest.py`, measure the true two-sided daily and annualized turnover, compute the **breakeven transaction cost in bps**, and plot or tabulate Net Sharpe across `0, 2, 5, 10, 15, 20 bps`. Should the IC **FUND**, **PILOT**, or **PASS**?
+## 3. Audit & Validation Question
+Inspect `proposer_backtest.py`, measure the true two-sided daily and annualized turnover, compute the **breakeven transaction cost in bps**, and plot or tabulate Net Sharpe across `0, 2, 5, 10, 15, 20 bps`. Should your validation gate **FUND**, **PILOT**, or **PASS**?
