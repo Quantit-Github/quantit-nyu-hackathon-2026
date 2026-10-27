@@ -39,8 +39,11 @@ This repository is structured into **three graduated levels** so your team can b
 ### Level 3 — The $1,000 Post-Cutoff Live Duel (`data/market_sandbox/` · Nov 18 – Dec 18, 2026)
 - Prof. Christian Grewell is funding the winning team's recommendation with **$1,000 in real cash** for one month starting **Wednesday, Nov 18, 2026**.
 - **Nov 18 – Dec 18, 2026 lies strictly after every frontier LLM's training cutoff**—making it a true test of out-of-sample generalization.
-- Inside `data/market_sandbox/`, you have daily returns (`2018-01-02` to `2026-06-30`) across **20 liquid US ETFs** (`SPY`, `QQQ`, `IWM`, 12 sector ETFs, plus `SHY`, `IEF`, `TLT`, `GLD`, `LQD`) and macro/regime indicators (`macro_and_regime_signals_2018_2026.csv`).
-- Have your agent synthesize, repair, or ensemble a long-only portfolio and evaluate it with `python scripts/evaluate_custom_portfolio.py` (which logs every trial to `logs/sandbox_trial_ledger.jsonl` so your Deflated Sharpe Ratio is tracked honestly), then output your final weights in `submission/portfolio_submission.json`.
+- Inside `data/market_sandbox/`, you have daily returns (`2018-01-02` to `2026-06-30`, 2,134 trading days) across **130 Assets (`multi_asset_universe_130_returns_2018_2026.csv`)**:
+  - **42 Liquid Multi-Asset & Thematic ETFs** (`liquid_etf_daily_returns_2018_2026.csv`: Broad US, 13 Sectors, 10 Industry/Thematic like `SMH`, `IGV`, `IBB`, `XBI`, `KRE`, `XOP`, `ITA`, `GDX`, `XHB`, `XRT`, 5 Factor ETFs `MTUM`, `QUAL`, `VLUE`, `USMV`, `SIZE`, 5 Treasury/Credit ETFs `SHY`, `IEF`, `TLT`, `LQD`, `HYG`, and 3 Commodity ETFs `GLD`, `SLV`, `DBC`).
+  - **80 Active US Large-Cap Equities** (`us_equity_daily_returns_2018_2026.csv`: S&P 100 / Nasdaq-100 leaders across all 11 sectors) **+ 8 Delisted Historical Trap Stocks (`DELIST_01` … `DELIST_08`)** to test whether your agent's stock screen checks universe survivorship (`sandbox_universe_metadata.json`).
+  - **Macro & Regime Indicators** (`macro_and_regime_signals_2018_2026.csv`).
+- Have your agent synthesize, repair, or ensemble a long-only portfolio (3 to 25 liquid ETFs and/or large-cap equities) and evaluate it with `python scripts/evaluate_custom_portfolio.py` (which logs every trial to `logs/sandbox_trial_ledger.jsonl` so your Deflated Sharpe Ratio is tracked honestly), then output your final weights in `submission/portfolio_submission.json`.
 
 ---
 

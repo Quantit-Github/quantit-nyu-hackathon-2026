@@ -24,18 +24,25 @@ BLIND_CHALLENGE_CASES = (
 VALID_CALLS = ("FUND", "PILOT", "PASS")
 
 ALLOWED_LIQUID_TICKERS = {
-    # SPDR & iShares US Sector / Factor / Broad ETFs
-    "SPY", "QQQ", "IWM", "DIA", "VTI",
-    "XLK", "XLF", "XLE", "XLV", "XLI", "XLP", "XLY", "XLU", "XLB", "XLC", "XLRE",
-    "IYC", "IYR", "SMH", "IBB", "XBI", "KRE", "XOP", "GDX",
+    # 42 SPDR, iShares, VanEck, Invesco US Multi-Asset / Sector / Thematic / Factor / Bond / Commodity ETFs
+    "SPY", "QQQ", "IWM", "DIA", "VTI", "RSP",
+    "XLK", "XLF", "XLE", "XLV", "XLI", "XLP", "XLY", "XLU", "XLB", "XLC", "XLRE", "IYC", "IYR",
+    "SMH", "IGV", "IBB", "XBI", "KRE", "XOP", "ITA", "GDX", "XHB", "XRT",
     "MTUM", "QUAL", "VLUE", "USMV", "SIZE",
-    "TLT", "IEF", "SHY", "SGOV", "BIL", "LQD", "HYG", "GLD", "SLV", "DBC",
-    # Liquid Large-Cap US Equities (from Case 01 / S&P 100 core)
-    "AAPL", "MSFT", "NVDA", "AMZN", "META", "GOOGL", "AVGO", "ORCL", "CRM", "AMD",
-    "NFLX", "INTC", "TXN", "JPM", "BAC", "WFC", "GS", "MS", "BLK", "AXP", "XOM",
-    "CVX", "COP", "SLB", "EOG", "JNJ", "UNH", "LLY", "PFE", "ABBV", "TMO", "PG",
-    "KO", "PEP", "WMT", "COST", "MCD", "NKE", "DIS", "PYPL", "CAT", "HON", "UNP",
-    "GE", "BA", "NEE", "DUK",
+    "TLT", "IEF", "SHY", "SGOV", "BIL", "LQD", "HYG",
+    "GLD", "SLV", "DBC",
+    # 80 Liquid S&P 100 / Nasdaq-100 US Large-Cap Equities across all 11 GICS Sectors
+    "AAPL", "MSFT", "NVDA", "AVGO", "ORCL", "CRM", "AMD", "ADBE", "CSCO", "ACN", "IBM", "INTC", "TXN", "QCOM", "AMAT", "MU",
+    "META", "GOOGL", "NFLX", "DIS", "TMUS", "VZ", "T", "CMCSA", "PYPL",
+    "JPM", "V", "MA", "BAC", "WFC", "GS", "MS", "BLK", "AXP", "SPGI", "C", "SCHW",
+    "LLY", "UNH", "JNJ", "ABBV", "MRK", "TMO", "ABT", "PFE", "DHR", "AMGN", "ISRG", "GILD",
+    "AMZN", "HD", "MCD", "LOW", "SBUX", "BKNG", "TJX", "COST", "WMT", "TGT",
+    "PG", "PEP", "KO", "PM", "MDLZ", "CL",
+    "TSLA", "NKE", "F", "GM",
+    "CAT", "GE", "RTX", "HON", "UNP", "LMT", "DE", "BA", "UPS", "ETN",
+    "XOM", "CVX", "COP", "SLB", "EOG",
+    "LIN", "FCX", "APD", "SHW",
+    "NEE", "DUK", "SO",
 }
 
 
@@ -120,8 +127,8 @@ def validate_portfolio_submission(payload: dict | Path) -> list[str]:
         errors.append("`weights` must be a non-empty dictionary mapping ticker -> weight.")
         return errors
 
-    if not 3 <= len(weights) <= 12:
-        errors.append(f"Portfolio must hold between 3 and 12 tickers (got {len(weights)}).")
+    if not 3 <= len(weights) <= 25:
+        errors.append(f"Portfolio must hold between 3 and 25 tickers (got {len(weights)}).")
 
     total_w = 0.0
     for tkr, w in weights.items():

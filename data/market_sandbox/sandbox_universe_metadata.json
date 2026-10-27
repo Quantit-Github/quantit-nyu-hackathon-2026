@@ -1,29 +1,1189 @@
 {
-  "description": "Self-contained daily return and macro regime sandbox (2018-01-02 to 2026-06-30) for building and stress-testing custom agent strategies for the $1,000 live run.",
-  "tickers": [
-    "SPY",
-    "QQQ",
-    "IWM",
-    "XLK",
-    "XLF",
-    "XLE",
-    "XLV",
-    "XLI",
-    "XLP",
-    "XLY",
-    "XLU",
-    "XLB",
-    "XLC",
-    "IYC",
-    "IYR",
-    "SHY",
-    "IEF",
-    "TLT",
-    "GLD",
-    "LQD"
-  ],
+  "description": "130-Asset Multi-Asset & US Large-Cap Equity Sandbox (2018-01-02 to 2026-06-30, 2,134 trading days): 42 Liquid ETFs + 80 Active S&P 100/Nasdaq-100 Equities + 8 Delisted Survivorship Trap Stocks.",
+  "n_total_assets": 130,
+  "n_etfs": 42,
+  "n_active_equities": 80,
+  "n_delisted_traps": 8,
+  "files": {
+    "multi_asset_universe_130_returns_2018_2026.csv": "Full 130-column daily return panel (42 ETFs + 80 active stocks + 8 delisted stocks)",
+    "liquid_etf_daily_returns_2018_2026.csv": "42 liquid multi-asset, sector, thematic, factor, bond, and commodity ETFs",
+    "us_equity_daily_returns_2018_2026.csv": "80 active US large-cap equities + 8 delisted stocks (NaN after delisting_date)",
+    "macro_and_regime_signals_2018_2026.csv": "Daily macro, factor spread, rolling volatility, and CALM/STRESS regime indicators"
+  },
   "walk_forward_split_recommendation": {
-    "discovery_train_period": "2018-01-02 to 2023-12-29",
-    "out_of_sample_validation_period": "2024-01-02 to 2026-06-30"
-  }
+    "discovery_train_period": "2018-01-02 to 2023-12-29 (6 years)",
+    "out_of_sample_validation_period": "2024-01-02 to 2026-06-30 (2.5 years)"
+  },
+  "constituents": [
+    {
+      "ticker": "SPY",
+      "asset_class": "ETF",
+      "category_or_sector": "US Broad Large-Cap",
+      "typical_half_spread_bps": 2.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "QQQ",
+      "asset_class": "ETF",
+      "category_or_sector": "US Broad Nasdaq-100",
+      "typical_half_spread_bps": 3.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "IWM",
+      "asset_class": "ETF",
+      "category_or_sector": "US Broad Small-Cap",
+      "typical_half_spread_bps": 4.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "DIA",
+      "asset_class": "ETF",
+      "category_or_sector": "US Broad Dow 30",
+      "typical_half_spread_bps": 3.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "VTI",
+      "asset_class": "ETF",
+      "category_or_sector": "US Total Market",
+      "typical_half_spread_bps": 2.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "RSP",
+      "asset_class": "ETF",
+      "category_or_sector": "US S&P 500 Equal-Weight",
+      "typical_half_spread_bps": 4.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "XLK",
+      "asset_class": "ETF",
+      "category_or_sector": "Sector: Technology (SPDR XLK)",
+      "typical_half_spread_bps": 4.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "XLF",
+      "asset_class": "ETF",
+      "category_or_sector": "Sector: Financials (SPDR XLF)",
+      "typical_half_spread_bps": 4.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "XLE",
+      "asset_class": "ETF",
+      "category_or_sector": "Sector: Energy (SPDR XLE)",
+      "typical_half_spread_bps": 4.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "XLV",
+      "asset_class": "ETF",
+      "category_or_sector": "Sector: Health Care (SPDR XLV)",
+      "typical_half_spread_bps": 4.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "XLI",
+      "asset_class": "ETF",
+      "category_or_sector": "Sector: Industrials (SPDR XLI)",
+      "typical_half_spread_bps": 4.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "XLP",
+      "asset_class": "ETF",
+      "category_or_sector": "Sector: Consumer Staples (SPDR XLP)",
+      "typical_half_spread_bps": 4.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "XLY",
+      "asset_class": "ETF",
+      "category_or_sector": "Sector: Consumer Discretionary (SPDR XLY)",
+      "typical_half_spread_bps": 4.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "XLU",
+      "asset_class": "ETF",
+      "category_or_sector": "Sector: Utilities (SPDR XLU)",
+      "typical_half_spread_bps": 4.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "XLB",
+      "asset_class": "ETF",
+      "category_or_sector": "Sector: Materials (SPDR XLB)",
+      "typical_half_spread_bps": 4.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "XLC",
+      "asset_class": "ETF",
+      "category_or_sector": "Sector: Communication Services (SPDR XLC)",
+      "typical_half_spread_bps": 4.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "IYC",
+      "asset_class": "ETF",
+      "category_or_sector": "Sector: Consumer Durables / Cyclicals (iShares IYC)",
+      "typical_half_spread_bps": 4.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "IYR",
+      "asset_class": "ETF",
+      "category_or_sector": "Sector: Real Estate & Diversified (iShares IYR)",
+      "typical_half_spread_bps": 4.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "XLRE",
+      "asset_class": "ETF",
+      "category_or_sector": "Sector: Real Estate",
+      "typical_half_spread_bps": 5.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "SMH",
+      "asset_class": "ETF",
+      "category_or_sector": "Thematic: Semiconductors",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "IGV",
+      "asset_class": "ETF",
+      "category_or_sector": "Thematic: Software",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "IBB",
+      "asset_class": "ETF",
+      "category_or_sector": "Thematic: Biotech Large-Cap",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "XBI",
+      "asset_class": "ETF",
+      "category_or_sector": "Thematic: Biotech Equal-Weight",
+      "typical_half_spread_bps": 8.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "KRE",
+      "asset_class": "ETF",
+      "category_or_sector": "Thematic: Regional Banks",
+      "typical_half_spread_bps": 7.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "XOP",
+      "asset_class": "ETF",
+      "category_or_sector": "Thematic: Oil & Gas Exploration",
+      "typical_half_spread_bps": 7.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "ITA",
+      "asset_class": "ETF",
+      "category_or_sector": "Thematic: Aerospace & Defense",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "GDX",
+      "asset_class": "ETF",
+      "category_or_sector": "Thematic: Gold Miners",
+      "typical_half_spread_bps": 8.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "XHB",
+      "asset_class": "ETF",
+      "category_or_sector": "Thematic: Homebuilders",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "XRT",
+      "asset_class": "ETF",
+      "category_or_sector": "Thematic: Retail Equal-Weight",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "MTUM",
+      "asset_class": "ETF",
+      "category_or_sector": "Factor: Momentum",
+      "typical_half_spread_bps": 4.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "QUAL",
+      "asset_class": "ETF",
+      "category_or_sector": "Factor: Quality",
+      "typical_half_spread_bps": 4.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "VLUE",
+      "asset_class": "ETF",
+      "category_or_sector": "Factor: Enhanced Value",
+      "typical_half_spread_bps": 4.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "USMV",
+      "asset_class": "ETF",
+      "category_or_sector": "Factor: Minimum Volatility",
+      "typical_half_spread_bps": 4.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "SIZE",
+      "asset_class": "ETF",
+      "category_or_sector": "Factor: Mid/Small Size",
+      "typical_half_spread_bps": 4.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "SHY",
+      "asset_class": "ETF",
+      "category_or_sector": "Rates: 1-3Y US Treasury Cash",
+      "typical_half_spread_bps": 2.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "IEF",
+      "asset_class": "ETF",
+      "category_or_sector": "Rates: 7-10Y US Treasury",
+      "typical_half_spread_bps": 3.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "TLT",
+      "asset_class": "ETF",
+      "category_or_sector": "Rates: 20+Y US Treasury",
+      "typical_half_spread_bps": 4.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "LQD",
+      "asset_class": "ETF",
+      "category_or_sector": "Credit: Investment Grade Corp",
+      "typical_half_spread_bps": 4.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "HYG",
+      "asset_class": "ETF",
+      "category_or_sector": "Credit: High Yield Corp",
+      "typical_half_spread_bps": 5.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "GLD",
+      "asset_class": "ETF",
+      "category_or_sector": "Commodity: Physical Gold",
+      "typical_half_spread_bps": 4.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "SLV",
+      "asset_class": "ETF",
+      "category_or_sector": "Commodity: Physical Silver",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "DBC",
+      "asset_class": "ETF",
+      "category_or_sector": "Commodity: Broad Basket",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "AAPL",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Technology",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "MSFT",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Technology",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "NVDA",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Technology",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "AVGO",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Technology",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "ORCL",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Technology",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "CRM",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Technology",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "AMD",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Technology",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "ADBE",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Technology",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "CSCO",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Technology",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "ACN",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Technology",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "IBM",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Technology",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "INTC",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Technology",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "TXN",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Technology",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "QCOM",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Technology",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "META",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Communication Services",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "GOOGL",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Communication Services",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "NFLX",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Communication Services",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "DIS",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Communication Services",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "TMUS",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Communication Services",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "VZ",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Communication Services",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "T",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Communication Services",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "CMCSA",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Communication Services",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "JPM",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Financials",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "V",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Financials",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "MA",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Financials",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "BAC",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Financials",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "WFC",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Financials",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "GS",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Financials",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "MS",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Financials",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "BLK",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Financials",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "AXP",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Financials",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "SPGI",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Financials",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "LLY",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Healthcare",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "UNH",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Healthcare",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "JNJ",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Healthcare",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "ABBV",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Healthcare",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "MRK",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Healthcare",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "TMO",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Healthcare",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "ABT",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Healthcare",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "PFE",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Healthcare",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "DHR",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Healthcare",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "AMGN",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Healthcare",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "AMZN",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Consumer Retail & E-Commerce",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "HD",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Consumer Retail & E-Commerce",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "MCD",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Consumer Retail & E-Commerce",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "LOW",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Consumer Retail & E-Commerce",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "SBUX",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Consumer Retail & E-Commerce",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "BKNG",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Consumer Retail & E-Commerce",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "COST",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Consumer Retail & E-Commerce",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "WMT",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Consumer Retail & E-Commerce",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "PG",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Consumer Staples",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "PEP",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Consumer Staples",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "KO",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Consumer Staples",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "PM",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Consumer Staples",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "MDLZ",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Consumer Staples",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "CL",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Consumer Staples",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "TSLA",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Autos & Consumer Durables",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "NKE",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Autos & Consumer Durables",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "F",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Autos & Consumer Durables",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "GM",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Autos & Consumer Durables",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "CAT",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Industrials & Defense",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "GE",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Industrials & Defense",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "RTX",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Industrials & Defense",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "HON",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Industrials & Defense",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "UNP",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Industrials & Defense",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "LMT",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Industrials & Defense",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "DE",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Industrials & Defense",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "BA",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Industrials & Defense",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "XOM",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Energy",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "CVX",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Energy",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "COP",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Energy",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "SLB",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Energy",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "EOG",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Energy",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "LIN",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Materials & Chemicals",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "FCX",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Materials & Chemicals",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "APD",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Materials & Chemicals",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "SHW",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Materials & Chemicals",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "NEE",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Utilities",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "DUK",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Utilities",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "SO",
+      "asset_class": "US_EQUITY",
+      "category_or_sector": "Utilities",
+      "typical_half_spread_bps": 6.0,
+      "is_active_2026": true,
+      "delisting_date": null,
+      "eligible_for_live_1000_duel": true
+    },
+    {
+      "ticker": "DELIST_01",
+      "asset_class": "US_EQUITY_DELISTED",
+      "category_or_sector": "Distressed / Delisted Cohort",
+      "typical_half_spread_bps": 25.0,
+      "is_active_2026": false,
+      "delisting_date": "2020-02-26",
+      "eligible_for_live_1000_duel": false
+    },
+    {
+      "ticker": "DELIST_02",
+      "asset_class": "US_EQUITY_DELISTED",
+      "category_or_sector": "Distressed / Delisted Cohort",
+      "typical_half_spread_bps": 25.0,
+      "is_active_2026": false,
+      "delisting_date": "2020-11-24",
+      "eligible_for_live_1000_duel": false
+    },
+    {
+      "ticker": "DELIST_03",
+      "asset_class": "US_EQUITY_DELISTED",
+      "category_or_sector": "Distressed / Delisted Cohort",
+      "typical_half_spread_bps": 25.0,
+      "is_active_2026": false,
+      "delisting_date": "2021-08-27",
+      "eligible_for_live_1000_duel": false
+    },
+    {
+      "ticker": "DELIST_04",
+      "asset_class": "US_EQUITY_DELISTED",
+      "category_or_sector": "Distressed / Delisted Cohort",
+      "typical_half_spread_bps": 25.0,
+      "is_active_2026": false,
+      "delisting_date": "2022-05-31",
+      "eligible_for_live_1000_duel": false
+    },
+    {
+      "ticker": "DELIST_05",
+      "asset_class": "US_EQUITY_DELISTED",
+      "category_or_sector": "Distressed / Delisted Cohort",
+      "typical_half_spread_bps": 25.0,
+      "is_active_2026": false,
+      "delisting_date": "2023-03-03",
+      "eligible_for_live_1000_duel": false
+    },
+    {
+      "ticker": "DELIST_06",
+      "asset_class": "US_EQUITY_DELISTED",
+      "category_or_sector": "Distressed / Delisted Cohort",
+      "typical_half_spread_bps": 25.0,
+      "is_active_2026": false,
+      "delisting_date": "2023-12-04",
+      "eligible_for_live_1000_duel": false
+    },
+    {
+      "ticker": "DELIST_07",
+      "asset_class": "US_EQUITY_DELISTED",
+      "category_or_sector": "Distressed / Delisted Cohort",
+      "typical_half_spread_bps": 25.0,
+      "is_active_2026": false,
+      "delisting_date": "2024-09-06",
+      "eligible_for_live_1000_duel": false
+    },
+    {
+      "ticker": "DELIST_08",
+      "asset_class": "US_EQUITY_DELISTED",
+      "category_or_sector": "Distressed / Delisted Cohort",
+      "typical_half_spread_bps": 25.0,
+      "is_active_2026": false,
+      "delisting_date": "2025-06-11",
+      "eligible_for_live_1000_duel": false
+    }
+  ]
 }

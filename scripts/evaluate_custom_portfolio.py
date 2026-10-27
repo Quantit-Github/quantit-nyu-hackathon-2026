@@ -51,10 +51,10 @@ def main() -> int:
         parser.error("Provide either --portfolio <json> or --weights-csv <csv>")
 
     ret_df = pd.read_csv(
-        SANDBOX_DIR / "liquid_etf_daily_returns_2018_2026.csv",
+        SANDBOX_DIR / "multi_asset_universe_130_returns_2018_2026.csv",
         index_col=0,
         parse_dates=True,
-    ).loc[args.start_date : args.end_date]
+    ).loc[args.start_date : args.end_date].fillna(0.0)
     macro_df = pd.read_csv(
         SANDBOX_DIR / "macro_and_regime_signals_2018_2026.csv",
         index_col=0,
