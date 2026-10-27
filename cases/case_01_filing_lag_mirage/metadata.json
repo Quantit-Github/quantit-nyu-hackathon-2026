@@ -1,0 +1,8 @@
+{
+  "case_id": "case_01_filing_lag_mirage",
+  "title": "LLM Filing Sentiment Alpha",
+  "recommended_starter_card": "Card A (Unstructured Signal Extraction) / Card B",
+  "claimed_sharpe": 2.78,
+  "period": "2022-01-03 to 2025-12-31",
+  "n_assets": 20
+}

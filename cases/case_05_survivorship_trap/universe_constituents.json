@@ -1,0 +1,8 @@
+{
+  "panel_construction_method": "Selected top 30 active growth companies as of 2025-12-31 and backfilled daily returns to 2020-01-02.",
+  "as_of_selection_date": "2025-12-31",
+  "backtest_start_date": "2020-01-02",
+  "n_survivors_in_panel": 30,
+  "n_delisted_omitted": 12,
+  "audit_note": "See delisting_cohort_audit.csv and point_in_time_full_returns.csv for the 12 cohort members that delisted between 2020 and 2025."
+}

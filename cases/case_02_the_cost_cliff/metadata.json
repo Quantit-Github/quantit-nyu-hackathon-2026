@@ -1,0 +1,8 @@
+{
+  "case_id": "case_02_the_cost_cliff",
+  "title": "High-Frequency Industry Rotation",
+  "recommended_starter_card": "Card B (Hypothesis & Backtest Critic)",
+  "claimed_sharpe": 3.0,
+  "period": "2019-01-02 to 2026-06-30",
+  "n_assets": 12
+}

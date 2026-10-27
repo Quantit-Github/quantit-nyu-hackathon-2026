@@ -1,0 +1,71 @@
+{
+  "team_name": "REPLACE_WITH_TEAM_NAME",
+  "members": [
+    "Student 1 (netid@nyu.edu)",
+    "Student 2 (netid@nyu.edu)",
+    "Student 3 (netid@nyu.edu)"
+  ],
+  "primary_starter_card": "Card B: Hypothesis & Backtest Critic",
+  "agent_models_tested": [
+    "anthropic/claude-sonnet-4",
+    "deepseek/deepseek-r1"
+  ],
+  "case_verdicts": {
+    "case_01_filing_lag_mirage": {
+      "decision": "PASS",
+      "primary_finding": "TODO: State what happens when filing dates and entity anonymization are enforced.",
+      "key_metric_evidence": {
+        "claimed_sharpe": 2.78,
+        "audited_sharpe": 0.0
+      }
+    },
+    "case_02_the_cost_cliff": {
+      "decision": "PASS",
+      "primary_finding": "TODO: State the turnover bug in proposer_backtest.py and the breakeven cost in bps.",
+      "key_metric_evidence": {
+        "claimed_sharpe": 3.0,
+        "breakeven_bps": 0.0,
+        "net_sharpe_10bps": 0.0
+      }
+    },
+    "case_03_twenty_tries": {
+      "decision": "PASS",
+      "primary_finding": "TODO: State the total trial count N in experiment_ledger.jsonl and the resulting DSR / FDR.",
+      "key_metric_evidence": {
+        "claimed_sharpe": 1.33,
+        "n_trials": 0,
+        "deflated_sharpe_ratio": 0.0
+      }
+    },
+    "case_04_regime_correlation_spike": {
+      "decision": "PASS",
+      "primary_finding": "TODO: Compare average pairwise correlation and tail drawdown in CALM vs STRESS regimes.",
+      "key_metric_evidence": {
+        "calm_corr": 0.0,
+        "stress_corr": 0.0,
+        "max_drawdown": 0.0
+      }
+    },
+    "case_05_survivorship_trap": {
+      "decision": "PASS",
+      "primary_finding": "TODO: Quantify the performance gap when the 12 delisted cohort stocks are included point-in-time.",
+      "key_metric_evidence": {
+        "survivor_only_sharpe": 1.56,
+        "full_cohort_pit_sharpe": 0.0
+      }
+    },
+    "case_06_clean_sector_momentum": {
+      "decision": "FUND",
+      "primary_finding": "TODO: Verify cost survival, DSR on N=3 pre-registered trials, and random-basket percentile.",
+      "key_metric_evidence": {
+        "net_sharpe_10bps": 1.2,
+        "deflated_sharpe_ratio": 0.0,
+        "null_p95_sharpe": 0.0
+      }
+    }
+  },
+  "one_ai_mistake_caught_during_build": {
+    "what_the_agent_did_wrong": "TODO: Log one real mistake your AI agent made while analyzing the cases or writing code.",
+    "how_we_caught_and_fixed_it": "TODO: Describe the guardrail, tool check, or AGENTS.md rule you added to fix it."
+  }
+}

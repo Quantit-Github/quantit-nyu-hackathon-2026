@@ -1,0 +1,8 @@
+{
+  "case_id": "case_04_regime_correlation_spike",
+  "title": "All-Weather 5-Sleeve Diversified Shield",
+  "recommended_starter_card": "Card C (Regime & Risk Monitor)",
+  "claimed_sharpe": 3.61,
+  "period": "2018-01-02 to 2026-06-30",
+  "n_assets": 5
+}

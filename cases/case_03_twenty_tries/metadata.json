@@ -1,0 +1,8 @@
+{
+  "case_id": "case_03_twenty_tries",
+  "title": "Autonomous Discovery Winner (alpha_cand_070)",
+  "recommended_starter_card": "Card B (Hypothesis & Backtest Critic)",
+  "claimed_sharpe": 2.03,
+  "period": "2021-01-04 to 2024-12-31",
+  "n_assets": 12
+}

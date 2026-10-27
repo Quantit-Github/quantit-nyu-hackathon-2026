@@ -1,0 +1,14 @@
+{
+  "case_id": "case_06_clean_sector_momentum",
+  "title": "Weekly Top-4 Sector Rotation (Long-Only ETF Book)",
+  "recommended_starter_card": "All Cards (Control & Live Portfolio Candidate)",
+  "claimed_sharpe": 1.2,
+  "period": "2018-01-02 to 2026-06-30",
+  "n_assets": 12,
+  "latest_etf_weights": {
+    "XLC": 0.25,
+    "XLY": 0.25,
+    "XLV": 0.25,
+    "XLF": 0.25
+  }
+}

@@ -1,0 +1,3 @@
+{"trial_id": 1, "candidate_name": "sector_mom_top3_weekly", "n_obs": 2114, "net_sharpe_10bps": 1.123, "annual_turnover": 20.01}
+{"trial_id": 2, "candidate_name": "sector_mom_top4_weekly", "n_obs": 2114, "net_sharpe_10bps": 1.203, "annual_turnover": 17.4}
+{"trial_id": 3, "candidate_name": "sector_mom_top5_weekly", "n_obs": 2114, "net_sharpe_10bps": 1.153, "annual_turnover": 15.32}

@@ -1,0 +1,13 @@
+ticker,ipo_or_entry_date,delisting_date,delisting_reason,cumulative_return_to_delist,included_in_proposer_panel
+DELIST_01,2020-01-02,2020-10-16,Chapter 11 / Distress Delisting,-0.724,False
+DELIST_02,2020-01-02,2021-03-05,Distressed Merger (-80%+),-0.5329,False
+DELIST_03,2020-01-02,2021-07-21,Chapter 11 / Distress Delisting,-0.2188,False
+DELIST_04,2020-01-02,2021-12-03,Distressed Merger (-80%+),-0.4988,False
+DELIST_05,2020-01-02,2022-04-21,Chapter 11 / Distress Delisting,-0.2374,False
+DELIST_06,2020-01-02,2022-09-07,Distressed Merger (-80%+),-0.7959,False
+DELIST_07,2020-01-02,2023-01-24,Chapter 11 / Distress Delisting,-0.2741,False
+DELIST_08,2020-01-02,2023-06-09,Distressed Merger (-80%+),-0.655,False
+DELIST_09,2020-01-02,2023-10-25,Chapter 11 / Distress Delisting,-0.8709,False
+DELIST_10,2020-01-02,2024-03-13,Distressed Merger (-80%+),-0.5242,False
+DELIST_11,2020-01-02,2024-07-30,Chapter 11 / Distress Delisting,-0.7762,False
+DELIST_12,2020-01-02,2024-12-12,Distressed Merger (-80%+),0.0172,False

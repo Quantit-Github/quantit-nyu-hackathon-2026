@@ -1,0 +1,50 @@
+{
+  "BusEq": {
+    "etf": "XLK",
+    "name": "Technology (SPDR XLK)"
+  },
+  "Money": {
+    "etf": "XLF",
+    "name": "Financials (SPDR XLF)"
+  },
+  "Enrgy": {
+    "etf": "XLE",
+    "name": "Energy (SPDR XLE)"
+  },
+  "Hlth": {
+    "etf": "XLV",
+    "name": "Health Care (SPDR XLV)"
+  },
+  "Manuf": {
+    "etf": "XLI",
+    "name": "Industrials (SPDR XLI)"
+  },
+  "NoDur": {
+    "etf": "XLP",
+    "name": "Consumer Staples (SPDR XLP)"
+  },
+  "Shops": {
+    "etf": "XLY",
+    "name": "Consumer Discretionary (SPDR XLY)"
+  },
+  "Utils": {
+    "etf": "XLU",
+    "name": "Utilities (SPDR XLU)"
+  },
+  "Chems": {
+    "etf": "XLB",
+    "name": "Materials (SPDR XLB)"
+  },
+  "Telcm": {
+    "etf": "XLC",
+    "name": "Communication Services (SPDR XLC)"
+  },
+  "Durbl": {
+    "etf": "IYC",
+    "name": "Consumer Durables / Cyclicals (iShares IYC)"
+  },
+  "Other": {
+    "etf": "IYR",
+    "name": "Real Estate & Diversified (iShares IYR)"
+  }
+}

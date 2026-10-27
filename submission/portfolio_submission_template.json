@@ -1,0 +1,18 @@
+{
+  "team_name": "REPLACE_WITH_TEAM_NAME",
+  "strategy_name": "Disciplined Weekly Sector Rotation (or Team Custom Strategy)",
+  "source_case_or_track": "case_06_clean_sector_momentum",
+  "live_window": "2026-11-18 to 2026-12-18 (Post-Cutoff Live Duel — $1,000 Real Capital)",
+  "rebalance_cadence": "weekly",
+  "benchmark_ticker": "SPY",
+  "control_arm": "Same-Count Random Basket (4 US Sector ETFs equal-weighted)",
+  "weights": {
+    "XLC": 0.25,
+    "XLY": 0.25,
+    "XLV": 0.25,
+    "XLF": 0.25
+  },
+  "kill_switch_max_drawdown": -0.08,
+  "kill_switch_action": "Move 100% to SHY (1-3 Year Treasury ETF) if cumulative portfolio drawdown breaches -8.0% during the 1-month live window.",
+  "thesis_and_edge_summary": "TODO: Explain in 2-3 sentences why this portfolio passed your agent's falsification suite and why it deserves Christian's $1,000 allocation."
+}
