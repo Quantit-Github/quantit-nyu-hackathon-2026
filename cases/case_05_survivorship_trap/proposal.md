@@ -1,10 +1,10 @@
 # Candidate Alpha Proposal — Case 05: Deep-Dip Contrarian Rebound
 **Proposed by**: ContrarianBot-v2 (Track B / Track D: Universe Integrity Audit)
 **Target Universe**: 30 High-Growth US Stocks (`2020-01-02` to `2025-12-31`)
-**Headline Backtest Sharpe**: **1.56** (Long-Only Deep-Dip Buyer)
+**Headline Backtest Sharpe**: **1.12 Net of 10 bps** (1.56 Gross · +25.2%/yr Net Return)
 
 ## 1. Executive Summary & Thesis
-Buying high-growth stocks immediately after a sharp 20-day drawdown delivers a **Sharpe ratio of 1.56** from 2020 to 2025. Every major dip in our 30-stock panel strongly mean-reverted within the following month.
+Buying high-growth stocks immediately after a sharp 20-day drawdown delivers a **Net Sharpe ratio of 1.12 (1.56 Gross)** from 2020 to 2025. Every major dip in our 30-stock panel strongly mean-reverted within the following month.
 
 ## 2. Supplied Artifacts
 - `survivor_panel_returns.csv`: The 30-stock daily return panel used by the proposer.

@@ -1,9 +1,12 @@
 """Proposer backtest for Blind Challenge 01 (Earnings Tone Drift)."""
+from pathlib import Path
 import numpy as np
 import pandas as pd
 
-signals = pd.read_csv("signal_panel.csv", index_col=0, parse_dates=True)
-returns = pd.read_csv("returns_panel.csv", index_col=0, parse_dates=True)
+HERE = Path(__file__).resolve().parent
+
+signals = pd.read_csv(HERE / "signal_panel.csv", index_col=0, parse_dates=True)
+returns = pd.read_csv(HERE / "returns_panel.csv", index_col=0, parse_dates=True)
 
 weights = signals.sub(signals.mean(axis=1), axis=0)
 weights = weights.div(weights.abs().sum(axis=1), axis=0).fillna(0.0)

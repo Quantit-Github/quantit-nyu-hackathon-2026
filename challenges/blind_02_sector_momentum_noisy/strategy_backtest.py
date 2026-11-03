@@ -1,9 +1,12 @@
 """Naive daily rebalance script for Blind Challenge 02 (Can your agent repair it?)."""
+from pathlib import Path
 import numpy as np
 import pandas as pd
 
-raw_sig = pd.read_csv("raw_signal_panel.csv", index_col=0, parse_dates=True)
-returns = pd.read_csv("returns_panel.csv", index_col=0, parse_dates=True)
+HERE = Path(__file__).resolve().parent
+
+raw_sig = pd.read_csv(HERE / "raw_signal_panel.csv", index_col=0, parse_dates=True)
+returns = pd.read_csv(HERE / "returns_panel.csv", index_col=0, parse_dates=True)
 
 # Naive daily Top-4 selection on unsmoothed signal:
 weights = (raw_sig.rank(axis=1, ascending=False) <= 4).astype(float)

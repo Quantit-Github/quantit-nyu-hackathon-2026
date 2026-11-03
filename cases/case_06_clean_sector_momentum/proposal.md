@@ -1,7 +1,7 @@
 # Candidate Alpha Proposal — Case 06: Weekly Top-4 Sector Rotation (Long-Only ETF Book)
 **Proposed by**: DisciplinedQuant-Agent (Track B / Track C / Track D)
 **Target Universe**: 12 US Sectors mapped to liquid SPDR/iShares Sector ETFs (`2018-01-02` to `2026-06-30`)
-**Headline Backtest Sharpe**: **1.20 Net of 10 bps** (Gross: 1.30 · Active IR vs Equal-Weight: 1.45)
+**Headline Backtest Sharpe**: **1.21 Net of 10 bps** (Gross: 1.30 · Net of 15 bps: 1.16)
 
 ## 1. Executive Summary & Thesis
 Rather than chasing a 2.5+ Sharpe mirage with daily flipping or 80 parameter sweeps, we pre-registered a 3-variant hypothesis (`logs/experiment_ledger.jsonl`) ranking the 12 US sectors on a smoothed medium-term persistence signal and holding the **Top 4 sectors equal-weighted (25% each)**, rebalanced weekly.
@@ -15,7 +15,7 @@ Rather than chasing a 2.5+ Sharpe mirage with daily flipping or 80 parameter swe
 
 ## 3. Audit & Validation Question
 Run your full falsification suite on Case 06:
-1. Verify lag alignment (`.shift(1)`), annualized turnover (`17.40x/yr`), and net Sharpe at 10 bps (`1.20`) and 15 bps (`1.16`).
+1. Verify lag alignment (`.shift(1)`), annualized turnover (`17.54x/yr`), and net Sharpe at 10 bps (`1.21`) and 15 bps (`1.16`).
 2. Compute the **Deflated Sharpe Ratio (DSR)** given $N = 3$ trials in `logs/experiment_ledger.jsonl`.
-3. Compare against a **Same-Count Random Basket Control** (1,000 Monte Carlo draws holding 4 random sectors rebalanced weekly).
+3. Compare against a **Same-Count Random Basket Control** (250 Monte Carlo draws holding 4 random sectors rebalanced weekly).
 4. Should your validation gate **FUND**, **PILOT**, or **PASS** — and if funded for the $1,000 live duel, what kill-switch drawdown limit should govern the book?

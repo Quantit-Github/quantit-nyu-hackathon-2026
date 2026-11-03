@@ -184,7 +184,7 @@ def main():
     for cid in targets:
         output[cid] = DISPATCH[cid](CASES_DIR / cid)
 
-    print(json.dumps(output if args.all else output[targets[0]], indent=2))
+    print(json.dumps(output if args.all else output[targets[0]], indent=2, allow_nan=False))
 
 
 if __name__ == "__main__":

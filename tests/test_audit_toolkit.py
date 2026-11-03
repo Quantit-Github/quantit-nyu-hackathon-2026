@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import subprocess
+import sys
 
 import pandas as pd
 import pytest
@@ -92,6 +94,26 @@ def test_validators_catch_templates_and_pass_valid():
     v_tmpl = REPO_ROOT / "submission" / "audit_verdicts_template.json"
     v_errs = validate_audit_verdicts(v_tmpl)
     assert any("team_name" in e for e in v_errs)
+    assert any("All 6 cases were marked `PASS`" in e for e in v_errs)
+    assert any("blind_01_earnings_tone_drift.decision" in e for e in v_errs)
+
+    valid_verdicts = json.loads(v_tmpl.read_text())
+    valid_verdicts["team_name"] = "Stern Alpha Critics"
+    for cid in REQUIRED_CASES:
+        valid_verdicts["case_verdicts"][cid]["decision"] = (
+            "FUND" if cid == "case_06_clean_sector_momentum" else "PASS"
+        )
+        valid_verdicts["case_verdicts"][cid]["primary_finding"] = (
+            f"Audited {cid} with quantitative falsification checks and verified lag, cost, and multiplicity."
+        )
+    for bid in BLIND_CHALLENGE_CASES:
+        valid_verdicts["blind_challenge_verdicts"][bid]["decision"] = (
+            "FUND" if bid == "blind_04_defensive_sector_shield" else "PASS"
+        )
+        valid_verdicts["blind_challenge_verdicts"][bid]["primary_finding"] = (
+            f"Audited {bid} and verified lag alignment, cost curve, and trial multiplicity."
+        )
+    assert validate_audit_verdicts(valid_verdicts) == []
 
     tmpl_path = REPO_ROOT / "submission" / "portfolio_submission_template.json"
     errs = validate_portfolio_submission(tmpl_path)
@@ -132,4 +154,28 @@ def test_allowed_liquid_tickers_all_exist_in_sandbox():
     cols = set(pd.read_csv(sandbox_csv, nrows=2, index_col=0).columns)
     missing = ALLOWED_LIQUID_TICKERS - cols
     assert missing == set(), f"Allowed tickers missing from sandbox data: {sorted(missing)}"
+
+    meta = json.loads((SANDBOX_DIR / "sandbox_universe_metadata.json").read_text())
+    meta_tickers = {c["ticker"] for c in meta["constituents"]}
+    eligible_tickers = {c["ticker"] for c in meta["constituents"] if c["eligible_for_live_1000_duel"]}
+    assert meta_tickers == cols
+    assert eligible_tickers == ALLOWED_LIQUID_TICKERS
+
+
+def test_case_and_challenge_backtest_scripts_run_from_repo_root():
+    scripts = [
+        CASES_DIR / "case_02_the_cost_cliff" / "proposer_backtest.py",
+        CHALLENGES_DIR / "blind_01_earnings_tone_drift" / "strategy_backtest.py",
+        CHALLENGES_DIR / "blind_02_sector_momentum_noisy" / "strategy_backtest.py",
+    ]
+    for script in scripts:
+        proc = subprocess.run(
+            [sys.executable, str(script)],
+            cwd=str(REPO_ROOT),
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        assert proc.returncode == 0, f"{script} failed from REPO_ROOT: {proc.stderr}"
+
 

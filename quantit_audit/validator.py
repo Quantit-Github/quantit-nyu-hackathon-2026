@@ -88,16 +88,25 @@ def validate_audit_verdicts(payload: dict | Path) -> list[str]:
             f"All 6 cases were marked `{decisions[0]}` — remember the pack contains both planted traps AND at least one sound control."
         )
 
-    # Validate blind_challenge_verdicts if provided and populated
+    # Validate blind_challenge_verdicts
     blind_verdicts = payload.get("blind_challenge_verdicts")
-    if isinstance(blind_verdicts, dict):
-        for bid, bentry in blind_verdicts.items():
-            if bid not in BLIND_CHALLENGE_CASES:
-                errors.append(f"Unknown blind challenge id `{bid}` (expected one of {BLIND_CHALLENGE_CASES}).")
+    if not isinstance(blind_verdicts, dict):
+        errors.append("`blind_challenge_verdicts` must be a dictionary mapping blind_id -> verdict object.")
+    else:
+        for bid in BLIND_CHALLENGE_CASES:
+            if bid not in blind_verdicts:
+                errors.append(f"Missing blind challenge verdict entry for `{bid}`.")
                 continue
+            bentry = blind_verdicts[bid]
             bcall = bentry.get("decision")
             if bcall not in VALID_CALLS:
                 errors.append(f"`{bid}.decision` must be one of {VALID_CALLS}, got {bcall!r}.")
+            bdefect = str(bentry.get("primary_finding", "")).strip()
+            if len(bdefect) < 15 or "TODO" in bdefect.upper():
+                errors.append(f"`{bid}.primary_finding` must provide a concrete finding (>=15 chars, no TODO).")
+        for bid in blind_verdicts:
+            if bid not in BLIND_CHALLENGE_CASES:
+                errors.append(f"Unknown blind challenge id `{bid}` (expected one of {BLIND_CHALLENGE_CASES}).")
 
     return errors
 
@@ -108,7 +117,7 @@ def validate_portfolio_submission(payload: dict | Path) -> list[str]:
     Rules for the Nov 18 – Dec 18, 2026 live $1,000 run:
     - Long-only weights in [0.0, 0.40] per ticker.
     - Total weights must sum to 1.00 (within +/- 0.005).
-    - Minimum 3 distinct tickers, maximum 12 tickers.
+    - Minimum 3 distinct tickers, maximum 25 tickers.
     - All tickers must be liquid US-listed ETFs or large-cap equities (`ALLOWED_LIQUID_TICKERS`).
     - Must specify `benchmark_ticker` (default `SPY`) and `kill_switch_max_drawdown` in `[-0.25, -0.03]`.
     """

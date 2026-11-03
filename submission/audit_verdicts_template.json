@@ -55,7 +55,7 @@
       }
     },
     "case_06_clean_sector_momentum": {
-      "decision": "FUND",
+      "decision": "PASS",
       "primary_finding": "TODO: Verify cost survival, DSR on N=3 pre-registered trials, and random-basket percentile.",
       "key_metric_evidence": {
         "net_sharpe_10bps": 1.21,
@@ -66,19 +66,19 @@
   },
   "blind_challenge_verdicts": {
     "blind_01_earnings_tone_drift": {
-      "decision": "PASS",
+      "decision": "TODO",
       "primary_finding": "TODO: Have your agent audit challenges/blind_01_earnings_tone_drift and report the hidden defect."
     },
     "blind_02_sector_momentum_noisy": {
-      "decision": "PILOT",
+      "decision": "TODO",
       "primary_finding": "TODO: Have your agent diagnose and repair challenges/blind_02_sector_momentum_noisy."
     },
     "blind_03_factor_grid_winner": {
-      "decision": "PASS",
+      "decision": "TODO",
       "primary_finding": "TODO: Have your agent audit challenges/blind_03_factor_grid_winner."
     },
     "blind_04_defensive_sector_shield": {
-      "decision": "FUND",
+      "decision": "TODO",
       "primary_finding": "TODO: Have your agent audit challenges/blind_04_defensive_sector_shield."
     }
   },
