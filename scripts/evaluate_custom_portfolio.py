@@ -61,6 +61,7 @@ def main() -> int:
         parse_dates=True,
     ).loc[ret_df.index]
 
+    skipped_tickers: list[str] = []
     if args.portfolio:
         payload = json.loads(args.portfolio.read_text())
         w_dict = payload.get("weights", {})
@@ -68,7 +69,9 @@ def main() -> int:
         for tkr, val in w_dict.items():
             if tkr in w_df.columns:
                 w_df[tkr] = float(val)
-        n_held = max(1, len(w_dict))
+            else:
+                skipped_tickers.append(tkr)
+        n_held = max(1, len(w_dict) - len(skipped_tickers))
         rebal_days = 21
     else:
         raw_w = pd.read_csv(args.weights_csv, index_col=0, parse_dates=True)
@@ -82,8 +85,17 @@ def main() -> int:
         for col in raw_w.columns:
             if col in w_df.columns:
                 w_df[col] = raw_w[col].reindex(ret_df.index).ffill().fillna(0.0)
+            else:
+                skipped_tickers.append(col)
         n_held = max(1, int(round((w_df > 0.001).sum(axis=1).median())))
         rebal_days = 5
+
+    if skipped_tickers:
+        print(
+            f"[WARNING] Skipped {len(skipped_tickers)} ticker(s) not present in sandbox data: "
+            f"{', '.join(sorted(skipped_tickers))}",
+            file=sys.stderr,
+        )
 
     res_10 = run_weights_backtest(w_df, ret_df, cost_bps=10.0, lag=1)
     curve = cost_sensitivity_curve(w_df, ret_df, bps_grid=(0.0, 5.0, 10.0, 15.0, 20.0))
@@ -147,10 +159,12 @@ def main() -> int:
             "spy_mean_daily_stress_return": round(float(spy_stress.mean()), 5),
             "worst_stress_day_return": round(float(stress_ret.min()), 4),
         },
-        "cost_sensitivity_table": curve.to_dict(orient="records"),
+        "cost_sensitivity_table": curve.where(pd.notna(curve), None).to_dict(orient="records"),
         "matched_null_random_basket_benchmark": null_bench,
     }
-    print(json.dumps(report, indent=2))
+    if skipped_tickers:
+        report["skipped_unknown_tickers"] = sorted(skipped_tickers)
+    print(json.dumps(report, indent=2, allow_nan=False))
     return 0
 
 

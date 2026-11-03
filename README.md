@@ -46,12 +46,17 @@ To keep your 1-week sprint simple and focused, this repository has **two parts**
 
 Everything in this repository is **100% self-contained** (requires only `numpy`, `pandas`, `scipy`, `pytest`—no external market-data API keys needed inside your Icecube container).
 
+> **Important (Icecube Virtual Environment)**: Icecube cubes block `pip` outside a virtual environment and provide `python3` (no bare `python` command outside `.venv`). **In each new terminal tab, run `source .venv/bin/activate` first.**
+
 ```bash
 # 1. Clone the repository into your Icecube workspace
 git clone https://github.com/Quantit-Github/quantit-nyu-hackathon-2026.git
 cd quantit-nyu-hackathon-2026
 
-# 2. Install in editable mode (or run directly with system/venv Python)
+# 2. Create and activate a virtual environment, then install in editable mode
+#    (In each new terminal tab, run `source .venv/bin/activate` first.)
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -e ".[dev]"
 
 # 3. Verify all audit primitives and case files pass unit tests
@@ -60,8 +65,15 @@ pytest -q
 # 4. Run diagnostics on Guided Case 02 (The Cost Cliff)
 python scripts/inspect_case.py --case case_02_the_cost_cliff
 
-# 5. Evaluate a portfolio on the 130-Asset Market Sandbox (auto-logs trial N for DSR)
-python scripts/evaluate_custom_portfolio.py --portfolio submission/portfolio_submission_template.json
+# 5. Evaluate a dynamic strategy rule on the 130-Asset Market Sandbox
+#    Note: every run (including this first test run) counts as a trial in
+#    `logs/sandbox_trial_ledger.jsonl` for Deflated Sharpe Ratio (DSR) tracking.
+python scripts/evaluate_custom_portfolio.py --weights-csv cases/case_06_clean_sector_momentum/target_weights.csv
+
+# 6. Copy the submission templates to your working files before validating
+cp submission/audit_verdicts_template.json submission/audit_verdicts.json
+cp submission/portfolio_submission_template.json submission/portfolio_submission.json
+python scripts/validate_submission.py
 ```
 
 ---
@@ -117,7 +129,7 @@ quantit-nyu-hackathon-2026/
 
 ---
 
-## 6. Deliverables Checklist for Tuesday, Nov 17 (6:30 PM ET)
+## 6. Deliverables Checklist for Tuesday, Nov 17 (5:00 PM ET, Before Class)
 
 1. **`INTENT.md`** (copied from `INTENT_TEMPLATE.md` and posted to the class Agent Board).
 2. **Working Agent Prototype**: Your refined `AGENTS.md` + at least one custom verification tool/script in `.pi/extensions/` or `scripts/`.
@@ -125,9 +137,9 @@ quantit-nyu-hackathon-2026/
    - Baseline comparison (e.g., naive unguarded LLM prompt or equal-weight / random-basket baseline).
    - 5 structured test cases across `cases/`, `challenges/`, or `data/market_sandbox/`.
    - 1 real mistake your AI agent made during development and how your guardrail caught/fixed it.
-   - Validated `submission/audit_verdicts.json` and `submission/portfolio_submission.json` (check with `python scripts/validate_submission.py`).
-4. **90-Second Demo Video**: Submitted before class on Nov 17.
-5. **5-Minute Live Pitch**: Delivered live on Nov 17, closing with an evidence-backed **`FUND`**, **`PILOT`**, or **`PASS`** recommendation and your custom portfolio specification.
+   - Validated `submission/audit_verdicts.json` and `submission/portfolio_submission.json` (copy from `submission/audit_verdicts_template.json` and `submission/portfolio_submission_template.json` first, then check with `python scripts/validate_submission.py`).
+4. **90-Second Demo Video**: Submitted by 5:00 PM ET (before class) on Nov 17.
+5. **5-Minute Live Pitch**: Delivered live during the Nov 17 showcase (6:30–8:00 PM ET, KMC 2-90), closing with an evidence-backed **`FUND`**, **`PILOT`**, or **`PASS`** recommendation and your custom portfolio specification.
 
 ---
 

@@ -29,6 +29,8 @@ Before recommending `FUND` or `PILOT` on any candidate strategy or signal packet
    - Any Level 3 strategy must be a **repeatable rule** that outputs date-by-date weights (`--weights-csv`) using only data available before each date, and must be compared against equal-weight and same-size random portfolios from the same 130 assets.
 
 ## Available CLI & Python Tools
+> **Environment Note**: If `python` is not found, use `.venv/bin/python` and `.venv/bin/pytest` (or run `source .venv/bin/activate` first).
+
 - Run diagnostics on the 6 guided practice cases:
   ```bash
   python scripts/inspect_case.py --case case_01_filing_lag_mirage
@@ -36,11 +38,13 @@ Before recommending `FUND` or `PILOT` on any candidate strategy or signal packet
   ```
 - Evaluate a dynamic strategy rule (`--weights-csv`, date-by-date weights) or current snapshot (`--portfolio`) on the 130-Asset Market Sandbox (`data/market_sandbox/`):
   ```bash
+  # Note: every run is logged as a trial in logs/sandbox_trial_ledger.jsonl for DSR
   python scripts/evaluate_custom_portfolio.py --weights-csv cases/case_06_clean_sector_momentum/target_weights.csv
-  python scripts/evaluate_custom_portfolio.py --portfolio submission/portfolio_submission_template.json
   ```
-- Validate your final Strategy Audit verdicts and portfolio JSON before posting to the Agent Board / `@Grader`:
+- Copy the two submission templates to `submission/audit_verdicts.json` and `submission/portfolio_submission.json` first, then validate your final verdicts and portfolio JSON before posting to the Agent Board / `@Grader`:
   ```bash
+  cp submission/audit_verdicts_template.json submission/audit_verdicts.json
+  cp submission/portfolio_submission_template.json submission/portfolio_submission.json
   python scripts/validate_submission.py \
       --verdicts submission/audit_verdicts.json \
       --portfolio submission/portfolio_submission.json

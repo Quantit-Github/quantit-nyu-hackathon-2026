@@ -25,16 +25,32 @@ def main() -> int:
     parser.add_argument(
         "--verdicts",
         type=Path,
-        default=REPO_ROOT / "submission" / "audit_verdicts_template.json",
-        help="Path to audit_verdicts.json",
+        default=REPO_ROOT / "submission" / "audit_verdicts.json",
+        help="Path to audit_verdicts.json (default: submission/audit_verdicts.json)",
     )
     parser.add_argument(
         "--portfolio",
         type=Path,
-        default=REPO_ROOT / "submission" / "portfolio_submission_template.json",
-        help="Path to portfolio_submission.json",
+        default=REPO_ROOT / "submission" / "portfolio_submission.json",
+        help="Path to portfolio_submission.json (default: submission/portfolio_submission.json)",
     )
     args = parser.parse_args()
+
+    missing = False
+    if not args.verdicts.is_file():
+        print(
+            f"[MISSING] {args.verdicts} not found.\n"
+            "  Copy the template first: cp submission/audit_verdicts_template.json submission/audit_verdicts.json"
+        )
+        missing = True
+    if not args.portfolio.is_file():
+        print(
+            f"[MISSING] {args.portfolio} not found.\n"
+            "  Copy the template first: cp submission/portfolio_submission_template.json submission/portfolio_submission.json"
+        )
+        missing = True
+    if missing:
+        return 1
 
     v_errors = validate_audit_verdicts(args.verdicts)
     p_errors = validate_portfolio_submission(args.portfolio)

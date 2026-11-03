@@ -9,6 +9,7 @@ import pandas as pd
 import pytest
 
 from quantit_audit import (
+    ALLOWED_LIQUID_TICKERS,
     BLIND_CHALLENGE_CASES,
     REQUIRED_CASES,
     cost_sensitivity_curve,
@@ -102,3 +103,33 @@ def test_validators_catch_templates_and_pass_valid():
         "Weekly top-4 sector rotation passed N=3 DSR (0.996), 15 bps cost stress, and 99th percentile matched-null check."
     )
     assert validate_portfolio_submission(valid_payload) == []
+
+
+def test_zero_turnover_breakeven_is_null_and_valid_json():
+    dates = pd.bdate_range("2024-01-01", periods=30)
+    w = pd.DataFrame({"SPY": 0.6, "TLT": 0.4}, index=dates)
+    r = pd.DataFrame(
+        {
+            "SPY": [0.002 if i % 2 == 0 else -0.001 for i in range(30)],
+            "TLT": [-0.0005 if i % 3 == 0 else 0.001 for i in range(30)],
+        },
+        index=dates,
+    )
+    res = run_weights_backtest(w, r, cost_bps=10.0, lag=1)
+    assert res.breakeven_bps is None
+    assert res.summary_dict()["breakeven_bps"] is None
+    curve = cost_sensitivity_curve(w, r, bps_grid=(0.0, 10.0))
+    records = curve.where(pd.notna(curve), None).to_dict(orient="records")
+    # Strict JSON check (disallows Infinity / NaN)
+    serialized = json.dumps({"summary": res.summary_dict(), "curve": records}, allow_nan=False)
+    parsed = json.loads(serialized)
+    assert parsed["summary"]["breakeven_bps"] is None
+    assert all(row["breakeven_bps"] is None for row in parsed["curve"])
+
+
+def test_allowed_liquid_tickers_all_exist_in_sandbox():
+    sandbox_csv = SANDBOX_DIR / "multi_asset_universe_130_returns_2018_2026.csv"
+    cols = set(pd.read_csv(sandbox_csv, nrows=2, index_col=0).columns)
+    missing = ALLOWED_LIQUID_TICKERS - cols
+    assert missing == set(), f"Allowed tickers missing from sandbox data: {sorted(missing)}"
+

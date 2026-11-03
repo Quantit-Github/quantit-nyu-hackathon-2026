@@ -26,13 +26,18 @@ class BacktestResult:
     sharpe: float
     max_drawdown: float
     ann_turnover: float
-    breakeven_bps: float
+    breakeven_bps: float | None
     skew: float
     kurtosis: float
     daily_returns: pd.Series
     daily_turnover: pd.Series
 
     def summary_dict(self) -> dict:
+        be_val = (
+            round(self.breakeven_bps, 2)
+            if (self.breakeven_bps is not None and np.isfinite(self.breakeven_bps))
+            else None
+        )
         return {
             "n_obs": self.n_obs,
             "ann_return": round(self.ann_return, 4),
@@ -40,7 +45,7 @@ class BacktestResult:
             "sharpe": round(self.sharpe, 3),
             "max_drawdown": round(self.max_drawdown, 4),
             "ann_turnover": round(self.ann_turnover, 2),
-            "breakeven_bps": round(self.breakeven_bps, 2),
+            "breakeven_bps": be_val,
             "skew": round(self.skew, 3),
             "kurtosis": round(self.kurtosis, 3),
         }
@@ -106,7 +111,7 @@ def run_weights_backtest(
     ann_to = float(turnover.mean() * periods_per_year)
 
     mean_to = float(turnover.mean())
-    breakeven = float((gross_ret.mean() / mean_to) * 10000.0) if mean_to > 1e-9 else float("inf")
+    breakeven = float((gross_ret.mean() / mean_to) * 10000.0) if mean_to > 1e-9 else None
 
     return BacktestResult(
         n_obs=n_obs,
@@ -134,6 +139,11 @@ def cost_sensitivity_curve(
     rows = []
     for bps in bps_grid:
         res = run_weights_backtest(weights, returns, cost_bps=bps, lag=lag)
+        be_val = (
+            round(res.breakeven_bps, 2)
+            if (res.breakeven_bps is not None and np.isfinite(res.breakeven_bps))
+            else None
+        )
         rows.append(
             {
                 "cost_bps": bps,
@@ -142,7 +152,7 @@ def cost_sensitivity_curve(
                 "ann_vol": round(res.ann_vol, 4),
                 "max_drawdown": round(res.max_drawdown, 4),
                 "ann_turnover": round(res.ann_turnover, 2),
-                "breakeven_bps": round(res.breakeven_bps, 2),
+                "breakeven_bps": be_val,
             }
         )
     return pd.DataFrame(rows)
