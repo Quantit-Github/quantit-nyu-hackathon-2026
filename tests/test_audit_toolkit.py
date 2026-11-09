@@ -179,3 +179,34 @@ def test_case_and_challenge_backtest_scripts_run_from_repo_root():
         assert proc.returncode == 0, f"{script} failed from REPO_ROOT: {proc.stderr}"
 
 
+def test_evaluate_custom_portfolio_matches_case_06_and_blind_04():
+    ledger_path = REPO_ROOT / "logs" / "sandbox_trial_ledger.jsonl"
+    prior_ledger = ledger_path.read_text() if ledger_path.is_file() else None
+    try:
+        for rel_csv, min_sr in [
+            ("cases/case_06_clean_sector_momentum/target_weights.csv", 1.20),
+            ("challenges/blind_04_defensive_sector_shield/target_weights.csv", 1.20),
+        ]:
+            proc = subprocess.run(
+                [sys.executable, "scripts/evaluate_custom_portfolio.py", "--weights-csv", rel_csv],
+                cwd=str(REPO_ROOT),
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            assert proc.returncode == 0, f"evaluate_custom_portfolio failed on {rel_csv}: {proc.stderr}"
+            assert proc.stderr == "", f"Unexpected warning on {rel_csv}: {proc.stderr}"
+            payload = json.loads(proc.stdout)
+            assert payload["net_10bps_summary"]["sharpe"] >= min_sr
+            assert payload["multiplicity_audit"]["deflated_sharpe_ratio"] > 0.99
+    finally:
+        if prior_ledger is None:
+            if ledger_path.is_file():
+                ledger_path.unlink()
+            if ledger_path.parent.is_dir() and not any(ledger_path.parent.iterdir()):
+                ledger_path.parent.rmdir()
+        else:
+            ledger_path.write_text(prior_ledger)
+
+
+

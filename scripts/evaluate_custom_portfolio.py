@@ -80,6 +80,8 @@ def main() -> int:
         if sector_map_path.is_file():
             smap = json.loads(sector_map_path.read_text())
             rename_cols = {k: v["etf"] for k, v in smap.items() if k in raw_w.columns}
+            if "SHY_CASH" in raw_w.columns:
+                rename_cols["SHY_CASH"] = "SHY"
             raw_w = raw_w.rename(columns=rename_cols)
         w_df = pd.DataFrame(0.0, index=ret_df.index, columns=ret_df.columns)
         for col in raw_w.columns:
@@ -137,8 +139,21 @@ def main() -> int:
     stress_ret = net_series.loc[stress_mask]
     spy_stress = ret_df["SPY"].loc[stress_mask]
 
+    bond_and_delist = [
+        c for c in ret_df.columns
+        if c in {"SHY", "IEF", "TLT", "GLD", "LQD", "HYG", "SLV", "DBC"} or c.startswith("DELIST_")
+    ]
+    active_non_bond = [
+        c for c in w_df.columns
+        if c not in bond_and_delist and (w_df[c].abs() > 1e-6).any()
+    ]
+    if len(active_non_bond) >= max(n_held * 2, 10):
+        null_pool = ret_df[active_non_bond]
+    else:
+        null_pool = ret_df.drop(columns=bond_and_delist, errors="ignore")
+
     null_bench = matched_null_benchmark(
-        ret_df.drop(columns=["SHY", "IEF", "TLT", "GLD", "LQD"], errors="ignore"),
+        null_pool,
         n_held=min(n_held, 8),
         rebalance_every_n_days=rebal_days,
         cost_bps=10.0,
